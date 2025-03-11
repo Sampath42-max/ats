@@ -1,0 +1,10 @@
+flask 
+python-dotenv 
+spacy 
+fuzzywuzzy 
+pdfminer.six 
+pypdf2 
+pdf2image 
+pytesseract 
+python-docx 
+scikit-learn
