@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4203a9, #90bafc);
+            color: #fff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            padding: 8px 16px;
+            
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffeb3b;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .upload-section {
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        input[type="file"], select {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]:hover, select:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        input[type="submit"] {
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4203a9;
+            background: linear-gradient(135deg, #ffeb3b, #ff9800);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            transform: scale(1.1);
+        }
+
+        .error {
+            background: rgba(255, 75, 75, 0.8);
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .loading {
+            display: none;
+            background: rgba(255, 235, 59, 0.3);
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .results {
+            margin-top: 2rem;
+        }
+
+        .results h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #ffeb3b;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4203a9;
+            background: linear-gradient(135deg, #ffeb3b, #ff9800);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        a:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav a {
+                margin: 0.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            form {
+                max-width: 100%;
+            }
+
+            input[type="file"], select, input[type="submit"], a {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Resume Analyzer</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('upload_page') }}">Company</a>
+            <a href="{{ url_for('resume_analyzer') }}">Analyze</a>
+            
+        </nav>
+    </header>
+
+    <div class="container">
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if not score %}
+            <div class="upload-section">
+                <h2>Upload Your Resume</h2>
+                <form method="POST" enctype="multipart/form-data" id="resumeForm" action="{{ url_for('resume_analyzer') }}">
+                    <label for="file">Upload Resume (PDF/DOCX):</label>
+                    <input type="file" name="file" id="file" accept=".pdf,.docx" required>
+                    <label for="company">Select Company:</label>
+                    <select name="company" id="company">
+                        {% for key, value in companies.items() %}
+                            <option value="{{ key }}">{{ value.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Analyze">
+                </form>
+                <p class="loading" id="loading">Analyzing resume...</p>
+            </div>
+        {% else %}
+            <div class="results">
+                <h2>Results for {{ company_data.name }}</h2>
+                <h3>Resume Data:</h3>
+                <p><strong>Eligibility:</strong> {{ resume_data.eligibility | join(', ') }}</p>
+                {% if resume_data.eligibility == ['Not specified'] %}
+                    <p class="error">Warning: Could not detect eligibility details. Ensure your resume includes education details (e.g., "B.Tech 75%" or "CGPA: 7.87/10.0").</p>
+                {% endif %}
+                <p><strong>Skills:</strong> {{ resume_data.skill_set | join(', ') }}</p>
+                <p><strong>Personal Skills:</strong> {{ resume_data.personal_skills | join(', ') }}</p>
+                <p><strong>Projects:</strong> {{ resume_data.projects | join(', ') }}</p>
+                <p><strong>Activities:</strong> {{ resume_data.activities | join(', ') }}</p>
+                
+                <h3>Company Requirements:</h3>
+                <p><strong>Eligibility:</strong> {{ company_data.eligibility }}</p>
+                <p><strong>Skills:</strong> {{ company_data.skill_set | join(', ') }}</p>
+                <p><strong>Personal Skills:</strong> {{ company_data.personal_skills | join(', ') }}</p>
+                
+                <h3>Scores:</h3>
+                <p><strong>TF-IDF Similarity Score:</strong> {{ "%.2f" | format(similarity_score) }}</p>
+                <p><strong>Final Compatibility Score:</strong> {{ "%.2f" | format(score) }} / 100</p>
+                <a href="{{ url_for('resume_analyzer') }}">Analyze Another Resume</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('resumeForm').addEventListener('submit', function(event) {
+            const loading = document.getElementById('loading');
+            loading.style.display = 'block';
+            // Optional: Add a timeout to hide loading if the server doesn't respond
+            setTimeout(() => {
+                if (loading.style.display === 'block') {
+                    loading.textContent = 'Analysis taking longer than expected. Please wait...';
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

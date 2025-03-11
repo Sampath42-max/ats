@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4203a9, #90bafc);
+            color: #fff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffeb3b;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .home-section {
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .resume-gallery {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .resume-item {
+            position: absolute;
+            width: 150px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: moveResumes 30s linear infinite;
+            transform: rotate(5deg);
+        }
+
+        .resume-item:nth-child(1) { left: -200px; animation-delay: 0s; }
+        .resume-item:nth-child(2) { left: 100px; animation-delay: 4s; }
+        .resume-item:nth-child(3) { left: 400px; animation-delay: 8s; }
+        .resume-item:nth-child(4) { left: 700px; animation-delay: 12s; }
+
+        @keyframes moveResumes {
+            0% { transform: translateX(-200px) rotate(5deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(1000px) rotate(5deg); opacity: 0; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            nav a {
+                margin: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Resume Analyzer</h1>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/upload_page">Company</a>
+            <a href="/resume_analyzer">Analyze</a>
+            
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="home-section">
+            <h2>Welcome to Resume Analyzer</h2>
+            <p>
+                Optimize your resume with our advanced analysis tools. Get insights into job trends, skill matches, and formatting improvements.
+            </p>
+            <div class="resume-gallery">
+                <div class="resume-item"></div>
+                <div class="resume-item"></div>
+                <div class="resume-item"></div>
+                <div class="resume-item"></div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Resume Analyzer. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!-- /templates/ra2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer - Companies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4203a9, #90bafc);
+            color: #fff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffeb3b;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .upload-section {
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .image-preview {
+            width: 200px;
+            height: 150px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .analyze-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(66, 3, 169, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-decoration: none;
+        }
+
+        .image-preview:hover .analyze-overlay {
+            opacity: 1;
+        }
+
+        .analyze-text {
+            background: linear-gradient(135deg, #ffeb3b, #ff9800);
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: #4203a9;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .analyze-overlay:hover .analyze-text {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            nav a {
+                margin: 0.5rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .image-preview {
+                width: 150px;
+                height: 100px;
+            }
+            .analyze-text {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Resume Analyzer</h1>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/upload_page">Company</a>
+            <a href="/resume_analyzer">Analyze</a>
+            
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="upload-section">
+            <h2>Explore Companies</h2>
+            <div class="image-grid">
+                <div class="image-preview">
+                    <img src="/static/css/download.jpg" alt="Company 1">
+                    <a href="/company-details?company=company1" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/images.jpg" alt="Company 2">
+                    <a href="/company-details?company=company2" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/images (1).jpg" alt="Company 3">
+                    <a href="/company-details?company=company3" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/springrole_logo.jpg" alt="SpringRole">
+                    <a href="/company-details?company=springrole" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/Capgemini-Logo.jpg" alt="Capgemini">
+                    <a href="/company-details?company=capgemini" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/dow11nload.png" alt="Company 6">
+                    <a href="/company-details?company=company6" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/microsoft.png" alt="Microsoft">
+                    <a href="/company-details?company=microsoft" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/wingify.png" alt="Wingify">
+                    <a href="/company-details?company=wingify" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/acenture.png" alt="Accenture">
+                    <a href="/company-details?company=accenture" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/conginat.png" alt="Cognizant">
+                    <a href="/company-details?company=cognizant" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/oracle.png" alt="Oracle">
+                    <a href="/company-details?company=oracle" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+                <div class="image-preview">
+                    <img src="/static/css/wipro.png" alt="Wipro">
+                    <a href="/company-details?company=wipro" class="analyze-overlay">
+                        <span class="analyze-text">CHECK STATUS</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Resume Analyzer. All rights reserved.</p>
+    </footer>
+</body>
+</html>
